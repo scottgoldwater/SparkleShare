@@ -21,8 +21,19 @@ using System.Diagnostics;
 using SparkleLib;
 
 namespace SparkleLib.Git {
+    
+    public interface ISourceControl
+    {
+        void Start();
+        void StartAndWaitForExit();
+        string StartAndReadStandardOutput();
+        string StartAndReadStandardError();
+        string LocateCommand(string name);
+    }
 
-    public abstract class SparkleProcess : Process {
+    public abstract class SparkleProcess : Process, ISourceControl {
+
+
 
         public SparkleProcess (string path, string args) : base ()
         {
